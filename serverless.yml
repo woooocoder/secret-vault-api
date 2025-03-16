@@ -1,0 +1,166 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: devwoody
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: secret-vault
+service: secret-vault-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+package:
+  include:
+    - ./functions/**
+    - ./node_modules/**
+
+functions:
+  getUser:
+    handler: handler.getUser
+    events:
+      - http:
+          path: get-user
+          method: get
+  createUser:
+    handler: functions/user.createUser
+    events:
+      - http:
+          path: create-user
+          method: post
+  updateUser:
+    handler: handler.updateUser
+    events:
+      - http:
+          path: update-user
+          method: put
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - http:
+          path: delete-user
+          method: delete
+
+  getLogs:
+    handler: handler.getLogs
+    events:
+      - http:
+          path: get-logs
+          method: get
+  createLog:
+    handler: handler.createLog
+    events:
+      - http:
+          path: create-log
+          method: put
+
+  getProject:
+    handler: handler.getProject
+    events:
+      - http:
+          path: get-project
+          method: get
+  createProject:
+    handler: handler.createProject
+    events:
+      - http:
+          path: create-project
+          method: put
+  updateProject:
+    handler: handler.updateProject
+    events:
+      - http:
+          path: update-project
+          method: put
+  deleteProject:
+    handler: handler.deleteProject
+    events:
+      - http:
+          path: delete-project
+          method: delete
+
+  getSecrets:
+    handler: handler.getSecrets
+    events:
+      - http:
+          path: get-secrets
+          method: get
+  createSecret:
+    handler: handler.createSecret
+    events:
+      - http:
+          path: create-secret
+          method: put
+  updateSecret:
+    handler: handler.updateSecret
+    events:
+      - http:
+          path: update-secret
+          method: put
+  deleteSecret:
+    handler: handler.deleteSecret
+    events:
+      - http:
+          path: delete-secret
+          method: delete
+
+  registerWebhook:
+    handler: handler.registerWebhook
+    events:
+      - http:
+          path: registerWebhook
+          method: put
+  syncPipeline:
+    handler: handler.syncPipeline
+    events:
+      - http:
+          path: sync-pipeline
+          method: put
+
+resources:
+  Resources:
+    AuditLogTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: AuditLog
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    ProjectTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Project
+        AttributeDefinitions:
+          - AttributeName: projectId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: projectId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    SecretTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Secret
+        AttributeDefinitions:
+          - AttributeName: secretId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: secretId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+    UserTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: User
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
