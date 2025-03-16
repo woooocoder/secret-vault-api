@@ -43,8 +43,8 @@ This project is a serverless API built with AWS Lambda, API Gateway, DynamoDB, a
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository_url>
-   cd <project_directory>
+   git clone https://github.com/woooocoder/secret-vault-api
+   cd secret-vault-api
 
 2. ** Install dependencies**:
     ```bash
