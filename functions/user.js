@@ -3,7 +3,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 const createUser = async (event) => {
   const { firstName, lastName, email, password, role } = JSON.parse(event.body);
-  const userId = Date.now().toString(); // Unique ID
+  const userId = Date.now().toString();  
 
   const params = {
     TableName: 'User',
