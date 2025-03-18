@@ -15,7 +15,7 @@ package:
 
 functions:
   getUser:
-    handler: handler.getUser
+    handler: functions/user.getUser
     events:
       - http:
           path: get-user
@@ -27,17 +27,29 @@ functions:
           path: create-user
           method: post
   updateUser:
-    handler: handler.updateUser
+    handler: functions/user.updateUser
     events:
       - http:
           path: update-user
           method: put
   deleteUser:
-    handler: handler.deleteUser
+    handler: functions/user.deleteUser
     events:
       - http:
           path: delete-user
           method: delete
+  getUserById:
+    handler: functions/user.getUserById
+    events:
+      - http:
+          path: get-user-by-id
+          method: get
+  getAllUsers:
+    handler: functions/user.getAllUsers
+    events:
+      - http:
+          path: get-all-users
+          method: get
 
   getLogs:
     handler: handler.getLogs

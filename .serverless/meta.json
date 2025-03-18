@@ -41,6 +41,18 @@
                 "LogGroupName": "/aws/lambda/secret-vault-api-dev-deleteUser"
               }
             },
+            "GetUserByIdLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/secret-vault-api-dev-getUserById"
+              }
+            },
+            "GetAllUsersLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/secret-vault-api-dev-getAllUsers"
+              }
+            },
             "GetLogsLogGroup": {
               "Type": "AWS::Logs::LogGroup",
               "Properties": {
@@ -176,9 +188,9 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
-                "Handler": "handler.getUser",
+                "Handler": "functions/user.getUser",
                 "Runtime": "nodejs18.x",
                 "FunctionName": "secret-vault-api-dev-getUser",
                 "MemorySize": 1024,
@@ -199,7 +211,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "functions/user.createUser",
                 "Runtime": "nodejs18.x",
@@ -222,9 +234,9 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
-                "Handler": "handler.updateUser",
+                "Handler": "functions/user.updateUser",
                 "Runtime": "nodejs18.x",
                 "FunctionName": "secret-vault-api-dev-updateUser",
                 "MemorySize": 1024,
@@ -245,9 +257,9 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
-                "Handler": "handler.deleteUser",
+                "Handler": "functions/user.deleteUser",
                 "Runtime": "nodejs18.x",
                 "FunctionName": "secret-vault-api-dev-deleteUser",
                 "MemorySize": 1024,
@@ -263,12 +275,58 @@
                 "DeleteUserLogGroup"
               ]
             },
+            "GetUserByIdLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+                },
+                "Handler": "functions/user.getUserById",
+                "Runtime": "nodejs18.x",
+                "FunctionName": "secret-vault-api-dev-getUserById",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetUserByIdLogGroup"
+              ]
+            },
+            "GetAllUsersLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+                },
+                "Handler": "functions/user.getAllUsers",
+                "Runtime": "nodejs18.x",
+                "FunctionName": "secret-vault-api-dev-getAllUsers",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetAllUsersLogGroup"
+              ]
+            },
             "GetLogsLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.getLogs",
                 "Runtime": "nodejs18.x",
@@ -291,7 +349,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.createLog",
                 "Runtime": "nodejs18.x",
@@ -314,7 +372,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.getProject",
                 "Runtime": "nodejs18.x",
@@ -337,7 +395,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.createProject",
                 "Runtime": "nodejs18.x",
@@ -360,7 +418,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.updateProject",
                 "Runtime": "nodejs18.x",
@@ -383,7 +441,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.deleteProject",
                 "Runtime": "nodejs18.x",
@@ -410,7 +468,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.registerWebhook",
                 "Runtime": "nodejs18.x",
@@ -433,7 +491,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                  "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                  "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
                 },
                 "Handler": "handler.syncPipeline",
                 "Runtime": "nodejs18.x",
@@ -451,128 +509,148 @@
                 "SyncPipelineLogGroup"
               ]
             },
-            "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4": {
+            "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetUserLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k": {
+            "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateUserLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc": {
+            "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UpdateUserLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU": {
+            "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "DeleteUserLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY": {
+            "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetUserByIdLambdaFunction"
+                },
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+              }
+            },
+            "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetAllUsersLambdaFunction"
+                },
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+              }
+            },
+            "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetLogsLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg": {
+            "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateLogLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk": {
+            "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetProjectLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE": {
+            "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateProjectLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY": {
+            "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UpdateProjectLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk": {
+            "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "DeleteProjectLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "GetSecretsLambdaVersionDxCheT39RmdjCN7aUhhdjbKjGVvusB8huYUNcXHfSGI": "<REDACTED>",
-            "CreateSecretLambdaVersionvWHCqIa3Clxmoafqtk4lggDbqt7OTeiT4z47FSNpW8U": "<REDACTED>",
-            "UpdateSecretLambdaVersionFoJy0XGtutTyKlMgPSs6wkPvpnelw63brMxHTk4U": "<REDACTED>",
-            "DeleteSecretLambdaVersionUKsHYagLSZENPBKc8CsjHcTTfKBQvovoQg4DaXAe5D0": "<REDACTED>",
-            "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA": {
+            "GetSecretsLambdaVersiongcjmWQwfcqYMiiCVTbOMKFw57cHf2mQ3iBDpOrU": "<REDACTED>",
+            "CreateSecretLambdaVersionSTQWQiIvr5FZJmdsHRYNUtG5bgMvf267kdHtOc6Q": "<REDACTED>",
+            "UpdateSecretLambdaVersionzezZE2mqArlZI0KcZF6z1ec49i1YncNFrE6g3kFGiI": "<REDACTED>",
+            "DeleteSecretLambdaVersionL5pMhpl6zbnnGcQwmWwlVvCj0FwZ5e7GSNUdvKs": "<REDACTED>",
+            "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "RegisterWebhookLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
-            "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo": {
+            "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "SyncPipelineLambdaFunction"
                 },
-                "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+                "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
               }
             },
             "ApiGatewayRestApi": {
@@ -642,6 +720,36 @@
                   ]
                 },
                 "PathPart": "delete-user",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceGetDashuserDashbyDashid": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "get-user-by-id",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceGetDashallDashusers": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "get-all-users",
                 "RestApiId": {
                   "Ref": "ApiGatewayRestApi"
                 }
@@ -953,6 +1061,98 @@
               },
               "DependsOn": [
                 "DeleteUserLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodGetDashuserDashbyDashidGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceGetDashuserDashbyDashid"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "GetUserByIdLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "GetUserByIdLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodGetDashallDashusersGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceGetDashallDashusers"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "GetAllUsersLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "GetAllUsersLambdaPermissionApiGateway"
               ]
             },
             "ApiGatewayMethodGetDashlogsGet": {
@@ -1327,7 +1527,7 @@
                 "SyncPipelineLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1742083501093": {
+            "ApiGatewayDeployment1742318952682": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -1340,6 +1540,8 @@
                 "ApiGatewayMethodCreateDashuserPost",
                 "ApiGatewayMethodUpdateDashuserPut",
                 "ApiGatewayMethodDeleteDashuserDelete",
+                "ApiGatewayMethodGetDashuserDashbyDashidGet",
+                "ApiGatewayMethodGetDashallDashusersGet",
                 "ApiGatewayMethodGetDashlogsGet",
                 "ApiGatewayMethodCreateDashlogPut",
                 "ApiGatewayMethodGetDashprojectGet",
@@ -1471,6 +1673,80 @@
                 "FunctionName": {
                   "Fn::GetAtt": [
                     "DeleteUserLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "ApiGatewayRestApi"
+                      },
+                      "/*/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "GetUserByIdLambdaPermissionApiGateway": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetUserByIdLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "ApiGatewayRestApi"
+                      },
+                      "/*/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "GetAllUsersLambdaPermissionApiGateway": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetAllUsersLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -1871,7 +2147,7 @@
             "GetUserLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4"
+                "Ref": "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-GetUserLambdaFunctionQualifiedArn"
@@ -1880,7 +2156,7 @@
             "CreateUserLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k"
+                "Ref": "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -1889,7 +2165,7 @@
             "UpdateUserLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc"
+                "Ref": "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -1898,16 +2174,34 @@
             "DeleteUserLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU"
+                "Ref": "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-DeleteUserLambdaFunctionQualifiedArn"
               }
             },
+            "GetUserByIdLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8"
+              },
+              "Export": {
+                "Name": "sls-secret-vault-api-dev-GetUserByIdLambdaFunctionQualifiedArn"
+              }
+            },
+            "GetAllUsersLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY"
+              },
+              "Export": {
+                "Name": "sls-secret-vault-api-dev-GetAllUsersLambdaFunctionQualifiedArn"
+              }
+            },
             "GetLogsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY"
+                "Ref": "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-GetLogsLambdaFunctionQualifiedArn"
@@ -1916,7 +2210,7 @@
             "CreateLogLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg"
+                "Ref": "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-CreateLogLambdaFunctionQualifiedArn"
@@ -1925,7 +2219,7 @@
             "GetProjectLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk"
+                "Ref": "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-GetProjectLambdaFunctionQualifiedArn"
@@ -1934,7 +2228,7 @@
             "CreateProjectLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE"
+                "Ref": "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-CreateProjectLambdaFunctionQualifiedArn"
@@ -1943,7 +2237,7 @@
             "UpdateProjectLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY"
+                "Ref": "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-UpdateProjectLambdaFunctionQualifiedArn"
@@ -1952,7 +2246,7 @@
             "DeleteProjectLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk"
+                "Ref": "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-DeleteProjectLambdaFunctionQualifiedArn"
@@ -1965,7 +2259,7 @@
             "RegisterWebhookLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA"
+                "Ref": "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-RegisterWebhookLambdaFunctionQualifiedArn"
@@ -1974,7 +2268,7 @@
             "SyncPipelineLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo"
+                "Ref": "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw"
               },
               "Export": {
                 "Name": "sls-secret-vault-api-dev-SyncPipelineLambdaFunctionQualifiedArn"
@@ -2018,11 +2312,11 @@
         "artifactsS3KeyDirname": "serverless/secret-vault-api/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
         "artifact": "C:\\Users\\Woody\\workspace\\secret-vault-api\\.serverless\\secret-vault-api.zip",
-        "artifactDirectoryName": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z"
+        "artifactDirectoryName": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z"
       },
       "functions": {
         "getUser": {
-          "handler": "handler.getUser",
+          "handler": "functions/user.getUser",
           "events": [
             {
               "http": {
@@ -2038,7 +2332,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4"
+          "versionLogicalId": "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8"
         },
         "createUser": {
           "handler": "functions/user.createUser",
@@ -2057,10 +2351,10 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k"
+          "versionLogicalId": "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64"
         },
         "updateUser": {
-          "handler": "handler.updateUser",
+          "handler": "functions/user.updateUser",
           "events": [
             {
               "http": {
@@ -2076,10 +2370,10 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc"
+          "versionLogicalId": "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA"
         },
         "deleteUser": {
-          "handler": "handler.deleteUser",
+          "handler": "functions/user.deleteUser",
           "events": [
             {
               "http": {
@@ -2095,7 +2389,45 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU"
+          "versionLogicalId": "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM"
+        },
+        "getUserById": {
+          "handler": "functions/user.getUserById",
+          "events": [
+            {
+              "http": {
+                "path": "get-user-by-id",
+                "method": "get",
+                "integration": "AWS_PROXY"
+              }
+            }
+          ],
+          "name": "secret-vault-api-dev-getUserById",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs18.x",
+          "vpc": {},
+          "versionLogicalId": "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8"
+        },
+        "getAllUsers": {
+          "handler": "functions/user.getAllUsers",
+          "events": [
+            {
+              "http": {
+                "path": "get-all-users",
+                "method": "get",
+                "integration": "AWS_PROXY"
+              }
+            }
+          ],
+          "name": "secret-vault-api-dev-getAllUsers",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs18.x",
+          "vpc": {},
+          "versionLogicalId": "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY"
         },
         "getLogs": {
           "handler": "handler.getLogs",
@@ -2114,7 +2446,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY"
+          "versionLogicalId": "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU"
         },
         "createLog": {
           "handler": "handler.createLog",
@@ -2133,7 +2465,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg"
+          "versionLogicalId": "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg"
         },
         "getProject": {
           "handler": "handler.getProject",
@@ -2152,7 +2484,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk"
+          "versionLogicalId": "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc"
         },
         "createProject": {
           "handler": "handler.createProject",
@@ -2171,7 +2503,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE"
+          "versionLogicalId": "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y"
         },
         "updateProject": {
           "handler": "handler.updateProject",
@@ -2190,7 +2522,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY"
+          "versionLogicalId": "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM"
         },
         "deleteProject": {
           "handler": "handler.deleteProject",
@@ -2209,7 +2541,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk"
+          "versionLogicalId": "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw"
         },
         "getSecrets": "<REDACTED>",
         "createSecret": "<REDACTED>",
@@ -2232,7 +2564,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA"
+          "versionLogicalId": "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY"
         },
         "syncPipeline": {
           "handler": "handler.syncPipeline",
@@ -2251,7 +2583,7 @@
           "timeout": 6,
           "runtime": "nodejs18.x",
           "vpc": {},
-          "versionLogicalId": "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo"
+          "versionLogicalId": "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw"
         }
       },
       "resources": {
@@ -2350,6 +2682,18 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/secret-vault-api-dev-deleteUser"
+            }
+          },
+          "GetUserByIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/secret-vault-api-dev-getUserById"
+            }
+          },
+          "GetAllUsersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/secret-vault-api-dev-getAllUsers"
             }
           },
           "GetLogsLogGroup": {
@@ -2487,9 +2831,9 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
-              "Handler": "handler.getUser",
+              "Handler": "functions/user.getUser",
               "Runtime": "nodejs18.x",
               "FunctionName": "secret-vault-api-dev-getUser",
               "MemorySize": 1024,
@@ -2510,7 +2854,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "functions/user.createUser",
               "Runtime": "nodejs18.x",
@@ -2533,9 +2877,9 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
-              "Handler": "handler.updateUser",
+              "Handler": "functions/user.updateUser",
               "Runtime": "nodejs18.x",
               "FunctionName": "secret-vault-api-dev-updateUser",
               "MemorySize": 1024,
@@ -2556,9 +2900,9 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
-              "Handler": "handler.deleteUser",
+              "Handler": "functions/user.deleteUser",
               "Runtime": "nodejs18.x",
               "FunctionName": "secret-vault-api-dev-deleteUser",
               "MemorySize": 1024,
@@ -2574,12 +2918,58 @@
               "DeleteUserLogGroup"
             ]
           },
+          "GetUserByIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+              },
+              "Handler": "functions/user.getUserById",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "secret-vault-api-dev-getUserById",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetUserByIdLogGroup"
+            ]
+          },
+          "GetAllUsersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+              },
+              "Handler": "functions/user.getAllUsers",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "secret-vault-api-dev-getAllUsers",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAllUsersLogGroup"
+            ]
+          },
           "GetLogsLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.getLogs",
               "Runtime": "nodejs18.x",
@@ -2602,7 +2992,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.createLog",
               "Runtime": "nodejs18.x",
@@ -2625,7 +3015,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.getProject",
               "Runtime": "nodejs18.x",
@@ -2648,7 +3038,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.createProject",
               "Runtime": "nodejs18.x",
@@ -2671,7 +3061,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.updateProject",
               "Runtime": "nodejs18.x",
@@ -2694,7 +3084,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.deleteProject",
               "Runtime": "nodejs18.x",
@@ -2721,7 +3111,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.registerWebhook",
               "Runtime": "nodejs18.x",
@@ -2744,7 +3134,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-                "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+                "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
               },
               "Handler": "handler.syncPipeline",
               "Runtime": "nodejs18.x",
@@ -2762,128 +3152,148 @@
               "SyncPipelineLogGroup"
             ]
           },
-          "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4": {
+          "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k": {
+          "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateUserLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc": {
+          "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateUserLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU": {
+          "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteUserLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY": {
+          "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetUserByIdLambdaFunction"
+              },
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+            }
+          },
+          "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllUsersLambdaFunction"
+              },
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+            }
+          },
+          "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLogsLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg": {
+          "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateLogLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk": {
+          "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProjectLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE": {
+          "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateProjectLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY": {
+          "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateProjectLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk": {
+          "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteProjectLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "GetSecretsLambdaVersionDxCheT39RmdjCN7aUhhdjbKjGVvusB8huYUNcXHfSGI": "<REDACTED>",
-          "CreateSecretLambdaVersionvWHCqIa3Clxmoafqtk4lggDbqt7OTeiT4z47FSNpW8U": "<REDACTED>",
-          "UpdateSecretLambdaVersionFoJy0XGtutTyKlMgPSs6wkPvpnelw63brMxHTk4U": "<REDACTED>",
-          "DeleteSecretLambdaVersionUKsHYagLSZENPBKc8CsjHcTTfKBQvovoQg4DaXAe5D0": "<REDACTED>",
-          "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA": {
+          "GetSecretsLambdaVersiongcjmWQwfcqYMiiCVTbOMKFw57cHf2mQ3iBDpOrU": "<REDACTED>",
+          "CreateSecretLambdaVersionSTQWQiIvr5FZJmdsHRYNUtG5bgMvf267kdHtOc6Q": "<REDACTED>",
+          "UpdateSecretLambdaVersionzezZE2mqArlZI0KcZF6z1ec49i1YncNFrE6g3kFGiI": "<REDACTED>",
+          "DeleteSecretLambdaVersionL5pMhpl6zbnnGcQwmWwlVvCj0FwZ5e7GSNUdvKs": "<REDACTED>",
+          "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RegisterWebhookLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
-          "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo": {
+          "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SyncPipelineLambdaFunction"
               },
-              "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+              "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
             }
           },
           "ApiGatewayRestApi": {
@@ -2953,6 +3363,36 @@
                 ]
               },
               "PathPart": "delete-user",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashuserDashbyDashid": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "get-user-by-id",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashallDashusers": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "get-all-users",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -3264,6 +3704,98 @@
             },
             "DependsOn": [
               "DeleteUserLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetDashuserDashbyDashidGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashuserDashbyDashid"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": "<REDACTED>",
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetUserByIdLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetUserByIdLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetDashallDashusersGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashallDashusers"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": "<REDACTED>",
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetAllUsersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetAllUsersLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodGetDashlogsGet": {
@@ -3638,7 +4170,7 @@
               "SyncPipelineLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1742083501093": {
+          "ApiGatewayDeployment1742318952682": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -3651,6 +4183,8 @@
               "ApiGatewayMethodCreateDashuserPost",
               "ApiGatewayMethodUpdateDashuserPut",
               "ApiGatewayMethodDeleteDashuserDelete",
+              "ApiGatewayMethodGetDashuserDashbyDashidGet",
+              "ApiGatewayMethodGetDashallDashusersGet",
               "ApiGatewayMethodGetDashlogsGet",
               "ApiGatewayMethodCreateDashlogPut",
               "ApiGatewayMethodGetDashprojectGet",
@@ -3782,6 +4316,80 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "DeleteUserLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetUserByIdLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetUserByIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetAllUsersLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllUsersLambdaFunction",
                   "Arn"
                 ]
               },
@@ -4182,7 +4790,7 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4"
+              "Ref": "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-GetUserLambdaFunctionQualifiedArn"
@@ -4191,7 +4799,7 @@
           "CreateUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k"
+              "Ref": "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -4200,7 +4808,7 @@
           "UpdateUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc"
+              "Ref": "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -4209,16 +4817,34 @@
           "DeleteUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU"
+              "Ref": "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-DeleteUserLambdaFunctionQualifiedArn"
             }
           },
+          "GetUserByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8"
+            },
+            "Export": {
+              "Name": "sls-secret-vault-api-dev-GetUserByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllUsersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY"
+            },
+            "Export": {
+              "Name": "sls-secret-vault-api-dev-GetAllUsersLambdaFunctionQualifiedArn"
+            }
+          },
           "GetLogsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY"
+              "Ref": "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-GetLogsLambdaFunctionQualifiedArn"
@@ -4227,7 +4853,7 @@
           "CreateLogLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg"
+              "Ref": "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-CreateLogLambdaFunctionQualifiedArn"
@@ -4236,7 +4862,7 @@
           "GetProjectLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk"
+              "Ref": "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-GetProjectLambdaFunctionQualifiedArn"
@@ -4245,7 +4871,7 @@
           "CreateProjectLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE"
+              "Ref": "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-CreateProjectLambdaFunctionQualifiedArn"
@@ -4254,7 +4880,7 @@
           "UpdateProjectLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY"
+              "Ref": "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-UpdateProjectLambdaFunctionQualifiedArn"
@@ -4263,7 +4889,7 @@
           "DeleteProjectLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk"
+              "Ref": "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-DeleteProjectLambdaFunctionQualifiedArn"
@@ -4276,7 +4902,7 @@
           "RegisterWebhookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA"
+              "Ref": "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-RegisterWebhookLambdaFunctionQualifiedArn"
@@ -4285,7 +4911,7 @@
           "SyncPipelineLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo"
+              "Ref": "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw"
             },
             "Export": {
               "Name": "sls-secret-vault-api-dev-SyncPipelineLambdaFunctionQualifiedArn"
@@ -4339,7 +4965,7 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\norg: devwoody\n# \"app\" enables Serverless Framework Dashboard features and sharing them with other Services.\napp: secret-vault\nservice: secret-vault-api\n\nprovider:\n  name: aws\n  runtime: nodejs18.x\n\npackage:\n  include:\n    - ./functions/**\n    - ./node_modules/**\n\nfunctions:\n  getUser:\n    handler: handler.getUser\n    events:\n      - http:\n          path: get-user\n          method: get\n  createUser:\n    handler: functions/user.createUser\n    events:\n      - http:\n          path: create-user\n          method: post\n  updateUser:\n    handler: handler.updateUser\n    events:\n      - http:\n          path: update-user\n          method: put\n  deleteUser:\n    handler: handler.deleteUser\n    events:\n      - http:\n          path: delete-user\n          method: delete\n\n  getLogs:\n    handler: handler.getLogs\n    events:\n      - http:\n          path: get-logs\n          method: get\n  createLog:\n    handler: handler.createLog\n    events:\n      - http:\n          path: create-log\n          method: put\n\n  getProject:\n    handler: handler.getProject\n    events:\n      - http:\n          path: get-project\n          method: get\n  createProject:\n    handler: handler.createProject\n    events:\n      - http:\n          path: create-project\n          method: put\n  updateProject:\n    handler: handler.updateProject\n    events:\n      - http:\n          path: update-project\n          method: put\n  deleteProject:\n    handler: handler.deleteProject\n    events:\n      - http:\n          path: delete-project\n          method: delete\n\n  getSecrets:\n    handler: handler.getSecrets\n    events:\n      - http:\n          path: get-secrets\n          method: get\n  createSecret:\n    handler: handler.createSecret\n    events:\n      - http:\n          path: create-secret\n          method: put\n  updateSecret:\n    handler: handler.updateSecret\n    events:\n      - http:\n          path: update-secret\n          method: put\n  deleteSecret:\n    handler: handler.deleteSecret\n    events:\n      - http:\n          path: delete-secret\n          method: delete\n\n  registerWebhook:\n    handler: handler.registerWebhook\n    events:\n      - http:\n          path: registerWebhook\n          method: put\n  syncPipeline:\n    handler: handler.syncPipeline\n    events:\n      - http:\n          path: sync-pipeline\n          method: put\n\nresources:\n  Resources:\n    AuditLogTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: AuditLog\n        AttributeDefinitions:\n          - AttributeName: userId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: userId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    ProjectTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: Project\n        AttributeDefinitions:\n          - AttributeName: projectId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: projectId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    SecretTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: Secret\n        AttributeDefinitions:\n          - AttributeName: secretId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: secretId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    UserTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: User\n        AttributeDefinitions:\n          - AttributeName: userId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: userId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n",
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\norg: devwoody\n# \"app\" enables Serverless Framework Dashboard features and sharing them with other Services.\napp: secret-vault\nservice: secret-vault-api\n\nprovider:\n  name: aws\n  runtime: nodejs18.x\n\npackage:\n  include:\n    - ./functions/**\n    - ./node_modules/**\n\nfunctions:\n  getUser:\n    handler: functions/user.getUser\n    events:\n      - http:\n          path: get-user\n          method: get\n  createUser:\n    handler: functions/user.createUser\n    events:\n      - http:\n          path: create-user\n          method: post\n  updateUser:\n    handler: functions/user.updateUser\n    events:\n      - http:\n          path: update-user\n          method: put\n  deleteUser:\n    handler: functions/user.deleteUser\n    events:\n      - http:\n          path: delete-user\n          method: delete\n  getUserById:\n    handler: functions/user.getUserById\n    events:\n      - http:\n          path: get-user-by-id\n          method: get\n  getAllUsers:\n    handler: functions/user.getAllUsers\n    events:\n      - http:\n          path: get-all-users\n          method: get\n\n  getLogs:\n    handler: handler.getLogs\n    events:\n      - http:\n          path: get-logs\n          method: get\n  createLog:\n    handler: handler.createLog\n    events:\n      - http:\n          path: create-log\n          method: put\n\n  getProject:\n    handler: handler.getProject\n    events:\n      - http:\n          path: get-project\n          method: get\n  createProject:\n    handler: handler.createProject\n    events:\n      - http:\n          path: create-project\n          method: put\n  updateProject:\n    handler: handler.updateProject\n    events:\n      - http:\n          path: update-project\n          method: put\n  deleteProject:\n    handler: handler.deleteProject\n    events:\n      - http:\n          path: delete-project\n          method: delete\n\n  getSecrets:\n    handler: handler.getSecrets\n    events:\n      - http:\n          path: get-secrets\n          method: get\n  createSecret:\n    handler: handler.createSecret\n    events:\n      - http:\n          path: create-secret\n          method: put\n  updateSecret:\n    handler: handler.updateSecret\n    events:\n      - http:\n          path: update-secret\n          method: put\n  deleteSecret:\n    handler: handler.deleteSecret\n    events:\n      - http:\n          path: delete-secret\n          method: delete\n\n  registerWebhook:\n    handler: handler.registerWebhook\n    events:\n      - http:\n          path: registerWebhook\n          method: put\n  syncPipeline:\n    handler: handler.syncPipeline\n    events:\n      - http:\n          path: sync-pipeline\n          method: put\n\nresources:\n  Resources:\n    AuditLogTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: AuditLog\n        AttributeDefinitions:\n          - AttributeName: userId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: userId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    ProjectTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: Project\n        AttributeDefinitions:\n          - AttributeName: projectId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: projectId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    SecretTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: Secret\n        AttributeDefinitions:\n          - AttributeName: secretId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: secretId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    UserTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: User\n        AttributeDefinitions:\n          - AttributeName: userId\n            AttributeType: S\n        KeySchema:\n          - AttributeName: userId\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n",
     "command": [
       "deploy"
     ],
@@ -4352,54 +4978,54 @@
     "serviceProviderAwsCfStackName": "secret-vault-api-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:686255979453:stack/secret-vault-api-dev/67c73ab0-ffb8-11ef-b42a-0e5a1a4659fd",
     "serviceProviderAwsCfStackCreated": "2025-03-13T03:08:15.311Z",
-    "serviceProviderAwsCfStackUpdated": "2025-03-15T23:45:22.602Z",
+    "serviceProviderAwsCfStackUpdated": "2025-03-18T17:26:41.539Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "DeleteUserLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteUser:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteUser:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-DeleteUserLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "DeleteProjectLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteProject:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteProject:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-DeleteProjectLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UpdateSecretLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateSecret:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateSecret:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-UpdateSecretLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetProjectLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getProject:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getProject:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-GetProjectLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UpdateUserLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateUser:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateUser:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-UpdateUserLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetSecretsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getSecrets:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getSecrets:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-GetSecretsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetUserLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getUser:8",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getUser:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-GetUserLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetLogsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getLogs:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-getLogs:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-GetLogsLambdaFunctionQualifiedArn"
       },
@@ -4410,49 +5036,49 @@
       },
       {
         "OutputKey": "DeleteSecretLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteSecret:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-deleteSecret:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-DeleteSecretLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateSecretLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createSecret:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createSecret:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-CreateSecretLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateLogLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createLog:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createLog:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-CreateLogLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "RegisterWebhookLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-registerWebhook:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-registerWebhook:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-RegisterWebhookLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "SyncPipelineLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-syncPipeline:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-syncPipeline:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-SyncPipelineLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateProjectLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createProject:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createProject:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-CreateProjectLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CreateUserLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createUser:8",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-createUser:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-CreateUserLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "UpdateProjectLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateProject:7",
+        "OutputValue": "arn:aws:lambda:us-east-1:686255979453:function:secret-vault-api-dev-updateProject:8",
         "Description": "Current Lambda function version",
         "ExportName": "sls-secret-vault-api-dev-UpdateProjectLambdaFunctionQualifiedArn"
       },
@@ -4489,6 +5115,18 @@
           "Type": "AWS::Logs::LogGroup",
           "Properties": {
             "LogGroupName": "/aws/lambda/secret-vault-api-dev-deleteUser"
+          }
+        },
+        "GetUserByIdLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/secret-vault-api-dev-getUserById"
+          }
+        },
+        "GetAllUsersLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/secret-vault-api-dev-getAllUsers"
           }
         },
         "GetLogsLogGroup": {
@@ -4626,9 +5264,9 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
-            "Handler": "handler.getUser",
+            "Handler": "functions/user.getUser",
             "Runtime": "nodejs18.x",
             "FunctionName": "secret-vault-api-dev-getUser",
             "MemorySize": 1024,
@@ -4649,7 +5287,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "functions/user.createUser",
             "Runtime": "nodejs18.x",
@@ -4672,9 +5310,9 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
-            "Handler": "handler.updateUser",
+            "Handler": "functions/user.updateUser",
             "Runtime": "nodejs18.x",
             "FunctionName": "secret-vault-api-dev-updateUser",
             "MemorySize": 1024,
@@ -4695,9 +5333,9 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
-            "Handler": "handler.deleteUser",
+            "Handler": "functions/user.deleteUser",
             "Runtime": "nodejs18.x",
             "FunctionName": "secret-vault-api-dev-deleteUser",
             "MemorySize": 1024,
@@ -4713,12 +5351,58 @@
             "DeleteUserLogGroup"
           ]
         },
+        "GetUserByIdLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+            },
+            "Handler": "functions/user.getUserById",
+            "Runtime": "nodejs18.x",
+            "FunctionName": "secret-vault-api-dev-getUserById",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Role": {
+              "Fn::GetAtt": [
+                "IamRoleLambdaExecution",
+                "Arn"
+              ]
+            }
+          },
+          "DependsOn": [
+            "GetUserByIdLogGroup"
+          ]
+        },
+        "GetAllUsersLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
+            },
+            "Handler": "functions/user.getAllUsers",
+            "Runtime": "nodejs18.x",
+            "FunctionName": "secret-vault-api-dev-getAllUsers",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Role": {
+              "Fn::GetAtt": [
+                "IamRoleLambdaExecution",
+                "Arn"
+              ]
+            }
+          },
+          "DependsOn": [
+            "GetAllUsersLogGroup"
+          ]
+        },
         "GetLogsLambdaFunction": {
           "Type": "AWS::Lambda::Function",
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.getLogs",
             "Runtime": "nodejs18.x",
@@ -4741,7 +5425,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.createLog",
             "Runtime": "nodejs18.x",
@@ -4764,7 +5448,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.getProject",
             "Runtime": "nodejs18.x",
@@ -4787,7 +5471,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.createProject",
             "Runtime": "nodejs18.x",
@@ -4810,7 +5494,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.updateProject",
             "Runtime": "nodejs18.x",
@@ -4833,7 +5517,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.deleteProject",
             "Runtime": "nodejs18.x",
@@ -4860,7 +5544,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.registerWebhook",
             "Runtime": "nodejs18.x",
@@ -4883,7 +5567,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3d1e2608-9b7f",
-              "S3Key": "serverless/secret-vault-api/dev/1742083509159-2025-03-16T00:05:09.159Z/secret-vault-api.zip"
+              "S3Key": "serverless/secret-vault-api/dev/1742318959129-2025-03-18T17:29:19.129Z/secret-vault-api.zip"
             },
             "Handler": "handler.syncPipeline",
             "Runtime": "nodejs18.x",
@@ -4901,128 +5585,148 @@
             "SyncPipelineLogGroup"
           ]
         },
-        "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4": {
+        "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetUserLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k": {
+        "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "CreateUserLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc": {
+        "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "UpdateUserLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU": {
+        "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "DeleteUserLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY": {
+        "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "GetUserByIdLambdaFunction"
+            },
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+          }
+        },
+        "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "GetAllUsersLambdaFunction"
+            },
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
+          }
+        },
+        "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetLogsLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg": {
+        "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "CreateLogLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk": {
+        "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetProjectLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE": {
+        "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "CreateProjectLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY": {
+        "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "UpdateProjectLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk": {
+        "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "DeleteProjectLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "GetSecretsLambdaVersionDxCheT39RmdjCN7aUhhdjbKjGVvusB8huYUNcXHfSGI": "<REDACTED>",
-        "CreateSecretLambdaVersionvWHCqIa3Clxmoafqtk4lggDbqt7OTeiT4z47FSNpW8U": "<REDACTED>",
-        "UpdateSecretLambdaVersionFoJy0XGtutTyKlMgPSs6wkPvpnelw63brMxHTk4U": "<REDACTED>",
-        "DeleteSecretLambdaVersionUKsHYagLSZENPBKc8CsjHcTTfKBQvovoQg4DaXAe5D0": "<REDACTED>",
-        "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA": {
+        "GetSecretsLambdaVersiongcjmWQwfcqYMiiCVTbOMKFw57cHf2mQ3iBDpOrU": "<REDACTED>",
+        "CreateSecretLambdaVersionSTQWQiIvr5FZJmdsHRYNUtG5bgMvf267kdHtOc6Q": "<REDACTED>",
+        "UpdateSecretLambdaVersionzezZE2mqArlZI0KcZF6z1ec49i1YncNFrE6g3kFGiI": "<REDACTED>",
+        "DeleteSecretLambdaVersionL5pMhpl6zbnnGcQwmWwlVvCj0FwZ5e7GSNUdvKs": "<REDACTED>",
+        "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "RegisterWebhookLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
-        "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo": {
+        "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "SyncPipelineLambdaFunction"
             },
-            "CodeSha256": "/PnraFr9N0F3iYnJNGa16lCG+ZDtH9vE/dDZ2sJKdT0="
+            "CodeSha256": "ydROHEbkTpVgo1pPioXq9Bn/frWopNmEPFiksAey/F0="
           }
         },
         "ApiGatewayRestApi": {
@@ -5092,6 +5796,36 @@
               ]
             },
             "PathPart": "delete-user",
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayResourceGetDashuserDashbyDashid": {
+          "Type": "AWS::ApiGateway::Resource",
+          "Properties": {
+            "ParentId": {
+              "Fn::GetAtt": [
+                "ApiGatewayRestApi",
+                "RootResourceId"
+              ]
+            },
+            "PathPart": "get-user-by-id",
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayResourceGetDashallDashusers": {
+          "Type": "AWS::ApiGateway::Resource",
+          "Properties": {
+            "ParentId": {
+              "Fn::GetAtt": [
+                "ApiGatewayRestApi",
+                "RootResourceId"
+              ]
+            },
+            "PathPart": "get-all-users",
             "RestApiId": {
               "Ref": "ApiGatewayRestApi"
             }
@@ -5403,6 +6137,98 @@
           },
           "DependsOn": [
             "DeleteUserLambdaPermissionApiGateway"
+          ]
+        },
+        "ApiGatewayMethodGetDashuserDashbyDashidGet": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "HttpMethod": "GET",
+            "RequestParameters": {},
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceGetDashuserDashbyDashid"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            },
+            "ApiKeyRequired": "<REDACTED>",
+            "AuthorizationType": "NONE",
+            "Integration": {
+              "IntegrationHttpMethod": "POST",
+              "Type": "AWS_PROXY",
+              "Uri": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":apigateway:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":lambda:path/2015-03-31/functions/",
+                    {
+                      "Fn::GetAtt": [
+                        "GetUserByIdLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "/invocations"
+                  ]
+                ]
+              }
+            },
+            "MethodResponses": []
+          },
+          "DependsOn": [
+            "GetUserByIdLambdaPermissionApiGateway"
+          ]
+        },
+        "ApiGatewayMethodGetDashallDashusersGet": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "HttpMethod": "GET",
+            "RequestParameters": {},
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceGetDashallDashusers"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            },
+            "ApiKeyRequired": "<REDACTED>",
+            "AuthorizationType": "NONE",
+            "Integration": {
+              "IntegrationHttpMethod": "POST",
+              "Type": "AWS_PROXY",
+              "Uri": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":apigateway:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":lambda:path/2015-03-31/functions/",
+                    {
+                      "Fn::GetAtt": [
+                        "GetAllUsersLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "/invocations"
+                  ]
+                ]
+              }
+            },
+            "MethodResponses": []
+          },
+          "DependsOn": [
+            "GetAllUsersLambdaPermissionApiGateway"
           ]
         },
         "ApiGatewayMethodGetDashlogsGet": {
@@ -5777,7 +6603,7 @@
             "SyncPipelineLambdaPermissionApiGateway"
           ]
         },
-        "ApiGatewayDeployment1742083501093": {
+        "ApiGatewayDeployment1742318952682": {
           "Type": "AWS::ApiGateway::Deployment",
           "Properties": {
             "RestApiId": {
@@ -5790,6 +6616,8 @@
             "ApiGatewayMethodCreateDashuserPost",
             "ApiGatewayMethodUpdateDashuserPut",
             "ApiGatewayMethodDeleteDashuserDelete",
+            "ApiGatewayMethodGetDashuserDashbyDashidGet",
+            "ApiGatewayMethodGetDashallDashusersGet",
             "ApiGatewayMethodGetDashlogsGet",
             "ApiGatewayMethodCreateDashlogPut",
             "ApiGatewayMethodGetDashprojectGet",
@@ -5921,6 +6749,80 @@
             "FunctionName": {
               "Fn::GetAtt": [
                 "DeleteUserLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  "/*/*"
+                ]
+              ]
+            }
+          }
+        },
+        "GetUserByIdLambdaPermissionApiGateway": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "GetUserByIdLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  "/*/*"
+                ]
+              ]
+            }
+          }
+        },
+        "GetAllUsersLambdaPermissionApiGateway": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "GetAllUsersLambdaFunction",
                 "Arn"
               ]
             },
@@ -6321,7 +7223,7 @@
         "GetUserLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetUserLambdaVersionxhRL3gNPoBoCW8CiRSzVbwkVzo10eZ4Tye1aGubsc4"
+            "Ref": "GetUserLambdaVersionuQeWS3NEhAtzl5CBv0k6TIDOHaEAb7JsrAstAI1W8"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-GetUserLambdaFunctionQualifiedArn"
@@ -6330,7 +7232,7 @@
         "CreateUserLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "CreateUserLambdaVersionc5ZmiC51gl75CVYk18FR87A0ds6DVCMY4h20wluX43k"
+            "Ref": "CreateUserLambdaVersioneasT1b8GAuaC3PYUILgFzJytKEsrXdBG94jhfNg64"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-CreateUserLambdaFunctionQualifiedArn"
@@ -6339,7 +7241,7 @@
         "UpdateUserLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "UpdateUserLambdaVersionmJtwZfru8p9535iiykIHmBpnpxY4bPIdwBqm8eWKPc"
+            "Ref": "UpdateUserLambdaVersiondyXWN9PwOybLZI3YQ9CyCVbxmRXxwZzsxSGZC10dKA"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-UpdateUserLambdaFunctionQualifiedArn"
@@ -6348,16 +7250,34 @@
         "DeleteUserLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "DeleteUserLambdaVersionTMDqnz91XNaOFxgrJzZytlH2lUZ0SaalHEjX3DSYZU"
+            "Ref": "DeleteUserLambdaVersionzusSb3xkWXMzsCysXrHInpTDSsT5pS8W4eOfS6twM"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-DeleteUserLambdaFunctionQualifiedArn"
           }
         },
+        "GetUserByIdLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "GetUserByIdLambdaVersionKViII2LESKzKUNcV2memdNKKVlFGGYjEuseagmHPcx8"
+          },
+          "Export": {
+            "Name": "sls-secret-vault-api-dev-GetUserByIdLambdaFunctionQualifiedArn"
+          }
+        },
+        "GetAllUsersLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "GetAllUsersLambdaVersionIwFsaQvcOSpR936FDLffJguQ83YINCxc3bxsOTdY"
+          },
+          "Export": {
+            "Name": "sls-secret-vault-api-dev-GetAllUsersLambdaFunctionQualifiedArn"
+          }
+        },
         "GetLogsLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetLogsLambdaVersionk637VeClXQi5h0PVGMPMO0LPoXHrtfOCPgbD0hESEQY"
+            "Ref": "GetLogsLambdaVersion3T4CM1Jqmle6r0WMyXTTVcrilzaFIFsMBStH7YVBSU"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-GetLogsLambdaFunctionQualifiedArn"
@@ -6366,7 +7286,7 @@
         "CreateLogLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "CreateLogLambdaVersionFB4scrPTfZmeVyQQ5tFYd1wf9delqLzPPmFUEBySUrg"
+            "Ref": "CreateLogLambdaVersion2c2BsHxIFBlU95SKVA0DSAVl8kCmDGgm1Gpv79r31Mg"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-CreateLogLambdaFunctionQualifiedArn"
@@ -6375,7 +7295,7 @@
         "GetProjectLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetProjectLambdaVersionpE79zksrHKFywwgAfsvqNTh3mJVDiwmvUkXhNk"
+            "Ref": "GetProjectLambdaVersionDrYR58EMvxgxsOuO3gSp0sAn9pCqwTJ0J8oyLHc"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-GetProjectLambdaFunctionQualifiedArn"
@@ -6384,7 +7304,7 @@
         "CreateProjectLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "CreateProjectLambdaVersionIWiqLfhZB8HASUX6U22IuoeOBpfIlfzwrhgNXJWE"
+            "Ref": "CreateProjectLambdaVersionNNMQtKSw1VfjtSiDHHjzqC0qWaM9NLv1aO3SlB4D2Y"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-CreateProjectLambdaFunctionQualifiedArn"
@@ -6393,7 +7313,7 @@
         "UpdateProjectLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "UpdateProjectLambdaVersion3U4e6SbhWu1kpGUt80R6JZoXRnsh8BoadaSXnpK95zY"
+            "Ref": "UpdateProjectLambdaVersionI8laqwRdRpSmHWbbE53ADnuVRaV676qkvBJ5YWM"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-UpdateProjectLambdaFunctionQualifiedArn"
@@ -6402,7 +7322,7 @@
         "DeleteProjectLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "DeleteProjectLambdaVersionGuKILPNBhBkZY40i8TBAN47Iic7yNPNfbF7WZLSxmgk"
+            "Ref": "DeleteProjectLambdaVersion20RHmhxgDVx80BfCdZAKKdDQxaRu9b5SslgXzPEAEQw"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-DeleteProjectLambdaFunctionQualifiedArn"
@@ -6415,7 +7335,7 @@
         "RegisterWebhookLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "RegisterWebhookLambdaVersion14PTSvHz6WxF0tddzQ4zhKl04SFhOzj1y1LQzOC4dA"
+            "Ref": "RegisterWebhookLambdaVersion0t2cVKUkJ2ZKMlsd0XrUzYdrIAMF1qI7FIx24IK8kY"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-RegisterWebhookLambdaFunctionQualifiedArn"
@@ -6424,7 +7344,7 @@
         "SyncPipelineLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "SyncPipelineLambdaVersionIYexsHJ6AEmO1lAL4E2n0kKBanQce2toJjbPE5LmPo"
+            "Ref": "SyncPipelineLambdaVersions28qoq1Dq6db28pGT6r4CVFKyYG4DlWlD9s9pJoIw"
           },
           "Export": {
             "Name": "sls-secret-vault-api-dev-SyncPipelineLambdaFunctionQualifiedArn"
